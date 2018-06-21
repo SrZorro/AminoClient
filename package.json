@@ -10,6 +10,13 @@
   },
   "author": "Marc 'Fox' Salva Montaner <fox@foxdev.io>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SrZorro/AminoClient/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SrZorro/AminoClient"
+  },
   "dependencies": {
     "cross-fetch": "^2.2.1",
     "uuid": "^3.2.1"
