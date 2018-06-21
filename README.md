@@ -28,11 +28,9 @@ const AminoClient = require("aminoclient").default; //javascript / commonjs
 
     for (const community of joinedComms.communityList) {
         console.log(`Community ${community.name} contains ${community.membersCount} members.`);
-        try {
-            await AminoClient.checkIn(community.ndcId);
-        } catch(e) {
-            console.log("You alread checkedIn in this community");
-        }
+        const checkIn = await AminoClient.checkIn(community.ndcId);
+        if(checkIn["api:statuscode"] !== 0)
+            console.log("You already checked in in this community today!");
     }
 })();
 ```

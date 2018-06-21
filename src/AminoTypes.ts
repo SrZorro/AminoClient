@@ -38,8 +38,38 @@ export interface IAminoAccount {
     createdTime: string;
 }
 
+export interface IWallet extends IBaseAPI {
+    wallet: {
+        totalCoins: number
+    };
+}
+
+export interface IOnlineMembers extends IBaseAPI {
+    userProfileCount: number;
+    userProfileList: IUserProfile[];
+}
+
 export interface IAffiliations extends IBaseAPI {
     affiliations: string[];
+}
+
+export interface ICheckIn extends IBaseAPI {
+    additionalReputationPoint?: number;
+    canPlayLottery?: boolean;
+    consecutiveCheckInDays?: number;
+    earnedReputationPoint?: number;
+    userProfile?: ICheckInUserProfile;
+}
+
+export interface ICheckInUserProfile {
+    ccountMembershipStatus: number;
+    icon: string;
+    level: number;
+    nickname: string;
+    reputation: number;
+    role: number;
+    status: number;
+    uid: string;
 }
 
 export interface IJoinedCommunitiesInfo {

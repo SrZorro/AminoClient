@@ -57,6 +57,10 @@ class AminoClient {
         return result;
     }
 
+    public async getWallet(): Promise<AminoTypes.IWallet> {
+        return await this.get(Endpoints.WALLET);
+    }
+
     public async getJoinedCommunities(start: number, size: number): Promise<AminoTypes.IJoinedCommunitiesInfo> {
         return await this.get(Endpoints.JOINED_COMMUNITIES(start, size));
     }
@@ -74,6 +78,17 @@ class AminoClient {
     }
 
     // ===[ COMMUNITY INTERACTION ]===
+    public async checkIn(ndcId: number): Promise<AminoTypes.ICheckIn> {
+        return await this.post(Endpoints.COMMUNITY_CHECK_IN(ndcId), {
+            timestamp: Math.round(new Date().getTime() / 1000),
+            timezone: 0
+        }, {
+                "NDCDEVICEID": this.deviceId,
+                "NDCAUTH": `sid=${this.sid}`,
+                "NDC-MSG-SIG": this.getMessageSignature()
+            });
+    }
+
     // Don't know what this is
     public async getLinkIdentify(q: string) {
         return await this.get(Endpoints.LINK_IDENTIFY(q));
@@ -96,16 +111,24 @@ class AminoClient {
         return await this.get(Endpoints.COMMUNITY_INFO(ndcId));
     }
 
-    public async checkIn(ndcId: number): Promise<any> {
-        return await this.get(Endpoints.COMMUNITY_CHECK_IN(ndcId));
-    }
-
     public async getJoinedChats(ndcId: number, start: number, size: number): Promise<AminoTypes.IAminoThread[]> {
         const response = await this.get(Endpoints.COMMUNITY_CHAT_THREAD(ndcId, "joined-me", start, size));
         return response.threadList;
     }
 
+    public async getOnlineMembers(ndcId: number, start: number, size: number): Promise<AminoTypes.IOnlineMembers> {
+        return await this.get(Endpoints.COMMUNITY_ONLINE_MEMBERS(ndcId, start, size));
+    }
+
     // ===[ THREAD INTERACTION ]===
+    public async leaveThread(ndcId: number, threadId: string, uid: string): Promise<any> {
+        return await this.delete(Endpoints.COMMUNITY_CHAT_JOIN_LEAVE(ndcId, threadId, uid));
+    }
+
+    public async joinThread(ndcId: number, threadId: string, uid: string): Promise<any> {
+        return await this.post(Endpoints.COMMUNITY_CHAT_JOIN_LEAVE(ndcId, threadId, uid), {});
+    }
+
     public async getThreadMessages(ndcId: number, threadId: string, start: number, size: number, startTime?: string): Promise<AminoTypes.IAminoMessage[]> {
         let url = "";
         if (startTime === undefined) {
@@ -181,6 +204,16 @@ class AminoClient {
             NDCAUTH: `sid=${this.sid}`
         };
         const response = await fetch(url, { method: "POST", headers: headers ? headers : defaultHeaders, body: JSON.stringify(body) });
+        const json = await response.json();
+        return { ...json, response };
+    }
+
+    private async delete(url: string, headers?: Iheaders) {
+        const defaultHeaders: Iheaders = {
+            NDCDEVICEID: this.deviceId,
+            NDCAUTH: `sid=${this.sid}`
+        };
+        const response = await fetch(url, { method: "DELETE", headers: headers ? headers : defaultHeaders });
         const json = await response.json();
         return { ...json, response };
     }
