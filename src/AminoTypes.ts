@@ -35,21 +35,21 @@ export interface IAminoAccount {
     securityLevel: number;
     gender: null;
     longitude: null;
-    createdTime: string
+    createdTime: string;
 }
 
 export interface IAffiliations extends IBaseAPI {
-    affiliations: Array<string>;
+    affiliations: string[];
 }
 
 export interface IJoinedCommunitiesInfo {
     communityList: IAminoCommunity[];
-    userInfoInCommunities: { [key: string]: IUserProfile }
+    userInfoInCommunities: { [key: string]: IUserProfile };
 }
 
 export interface IUserProfile {
     status: number;
-    moodSticker: any,
+    moodSticker: any;
     itemsCount: number;
     consecutiveCheckInDays: any;
     uid: string;
@@ -77,7 +77,7 @@ export interface IUserProfile {
     role: number;
     latitude: null | number;
     extensions: null | any;
-    blogsCount: number
+    blogsCount: number;
 }
 
 export interface IAminoCommunity {
@@ -103,7 +103,7 @@ export interface IAminoCommunity {
     membersCount: number;
     primaryLanguage: string;
     promotionalMediaList: Array<number | string | null>;
-    icon: string
+    icon: string;
 }
 
 export interface IAminoThread {
@@ -128,7 +128,7 @@ export interface IAminoThread {
     latestActivityTime?: Date;
     longitude?: number;
     extensions?: any;
-    createdTime?: Date
+    createdTime?: Date;
 }
 
 export interface IMiniUserProfile {
@@ -139,12 +139,12 @@ export interface IMiniUserProfile {
     reputation: number;
     role: number;
     nickname: string;
-    icon: string
+    icon: string;
 }
 
 export interface IPublicChats {
     threadList: IAminoThread[];
-    recommendedThreadList: IAminoThread[]
+    recommendedThreadList: IAminoThread[];
 }
 
 export interface IAminoMessage {
@@ -156,5 +156,5 @@ export interface IAminoMessage {
     clientRefId: string;
     messageId: string;
     createdTime: Date;
-    type: number
+    type: number;
 }
