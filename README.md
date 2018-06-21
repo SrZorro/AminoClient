@@ -15,7 +15,9 @@ yarn add aminoclient
 ## Example usage
 
 ```typescript
-import AminoClient from "aminoclient";
+import AminoClient from "aminoclient"; //typescript / ES6 modules
+const AminoClient = require("aminoclient").default; //javascript / commonjs
+
 
 (async () => {
     const auth = await AminoClient.login("**USERNAME**", "**PASSWORD**", "**DEVICEID**");
@@ -36,3 +38,7 @@ import AminoClient from "aminoclient";
 ```
 
 You can explore the rest of the API using this module with TypeScript meanwhile the documentation is WIP.
+
+## DeviceID?
+
+Take a look at my [AminoPC repo](https://github.com/SrZorro/AminoPC#not-so-easy) where I explain how to get one meanwhile the cool guys at [AminoREAPI](https://github.com/MrPowerGamerBR/AminoREAPI/issues/3) find a way to generate one from thin air.
