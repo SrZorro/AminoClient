@@ -1,6 +1,6 @@
 {
   "name": "aminoclient",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Library to interact with Amino endpoints.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
