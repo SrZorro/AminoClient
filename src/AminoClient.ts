@@ -107,6 +107,10 @@ class AminoClient {
         return await this.get(Endpoints.LEAVE_COMMUNITY(ndcId));
     }
 
+    public async getCommunityReminder(ndcId: number, timeZone: number): Promise<AminoTypes.ICommunityReminder> {
+        return await this.get(Endpoints.COMMUNITY_REMINDER(ndcId, timeZone));
+    }
+
     public async getCommunityInfo(ndcId: number): Promise<AminoTypes.ICommunityInfo> {
         return await this.get(Endpoints.COMMUNITY_INFO(ndcId));
     }

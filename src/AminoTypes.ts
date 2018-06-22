@@ -72,6 +72,16 @@ export interface ICheckInUserProfile {
     uid: string;
 }
 
+export interface ICommunityReminder extends IBaseAPI {
+    reminderCheckResult: {
+        consecutiveCheckInDays: number;
+        hasCheckInToday: boolean;
+        noticesCount: number;
+        notificationsCount: number;
+        unreadChatThreadsCount: number;
+    };
+}
+
 export interface ICommunityInfo extends IBaseAPI {
     community: IAminoCommunityComplex;
     currentUserInfo: {

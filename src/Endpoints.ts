@@ -12,6 +12,7 @@ export default {
     LINK_IDENTIFY: (q: string) => `${prefix}/g/s/community/link-identify?q={0}`,
     JOIN_COMMUNITY: (ndcId: number) => `${prefix}/${ndcId}/s/community/join`,
     LEAVE_COMMUNITY: (ndcId: number) => `${prefix}/${ndcId}/s/community/leave`,
+    COMMUNITY_REMINDER: (ndcId: number, timeZone: number) => `${prefix}/x${ndcId}/s/reminder/check?timezone=${timeZone}`,
     COMMUNITY_INFO: (ndcId: number) => `${prefix}/g/s-x${ndcId}/community/info`,
     JOINED_COMMUNITIES: (start: number, size: number) => `${prefix}/g/s/community/joined?start=${start}&size=${size}`,
     COMMUNITY_COLLECTION_SECTIONS: (language: string, start: number, size: number) => `${prefix}/g/s/community-collection/view/explore/sections?language=${language}&start=${start}&size=${size}`,
