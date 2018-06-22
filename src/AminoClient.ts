@@ -154,18 +154,21 @@ class AminoClient {
             });
         return msg;
     }
-    public async sendMediaInThread(ndcId: number, threadId: string, mediaB64: string, mediaType: string): Promise<AminoTypes.IAminoMessage> {
+
+    public async sendMediaInThread(ndcId: number, threadId: string, content: string, mediaType: string, mediaB64?: string): Promise<AminoTypes.IAminoMessage> {
         const body = {
             type: mediaType.includes("audio") ? 2 : 0,
             clientRefId: Math.round((new Date()).getTime() / 1000),
             mediaType: mediaType.includes("audio") ? 110 : 100,
-            // @ts-ignore
-            content: null,
-            mediaUploadValue: mediaB64,
+            content,
             // @ts-ignore
             attachedObject: null,
             timestamp: Math.round((new Date()).getTime() / 1000)
         };
+        if (mediaB64)
+            //@ts-ignore
+            body.mediaUploadValue = mediaB64;
+
         // Note: PNG support is kinda wroken, its converted to jpg and creates artefacts where transparency was located.
         if (mediaType.includes("image")) {
             // @ts-ignore
