@@ -72,8 +72,18 @@ export interface ICheckInUserProfile {
     uid: string;
 }
 
+export interface ICommunityInfo extends IBaseAPI {
+    community: any;
+    currentUserInfo: {
+        notificationsCount: number;
+        unreadChatThreadsCount: number;
+        userProfile: IUserProfile;
+    };
+    isCurrentUserJoined: boolean;
+}
+
 export interface IJoinedCommunitiesInfo {
-    communityList: IAminoCommunity[];
+    communityList: IAminoCommunitySimple[];
     userInfoInCommunities: { [key: string]: IUserProfile };
 }
 
@@ -110,81 +120,159 @@ export interface IUserProfile {
     blogsCount: number;
 }
 
-export interface IAminoCommunity {
-    status: number;
-    launchPage: {
-        mediaList: Array<Array<number | string | null | string>>,
-        title: string
-    };
-    endpoint: string;
-    name: string;
-    modifiedTime: string;
+export interface IAminoCommunityBase {
     communityHeat: number;
-    tagline: string;
-    templateId: number;
-    agent: object;
+    createdTime: string;
+    endpoint: string;
+    icon: string;
     joinType: number;
     link: string;
-    listedStatus: number;
-    themePack: object;
-    ndcId: number;
-    createdTime: string;
-    probationStatus: number;
     membersCount: number;
+    modifiedTime: string;
+    name: string;
+    ndcId: number;
     primaryLanguage: string;
-    promotionalMediaList: Array<number | string | null>;
-    icon: string;
+    probationStatus: number;
+    promotionalMediaList: Array<Array<number | string | null>>;
+    status: number;
+    tagline: string;
+    templateId: number;
+    themePack: {
+        themeColor: string;
+        themePackHash: string;
+        themePackRevision: number;
+        themePackUrl: string;
+    };
+}
+
+export interface IAminoCommunitySimple extends IAminoCommunityBase {
+    agent: {
+        accountMembershipStatus: number;
+    } & IMiniUserProfileNullable;
+    launchPage: {
+        mediaList: Array<Array<number | string | (string | null) | string>>;
+        title: string;
+    };
+    listedStatus: number;
+}
+
+export interface IAminoCommunityComplex extends IAminoCommunityBase {
+    advancedSettings: object;
+    agent: {
+        accountMembershipStatus: number;
+    } & IMiniUserProfile;
+    communityHeadList: {
+        accountMembershipStatus: number;
+    } & IMiniUserProfile[];
+    communityTagList: Array<{ name: string, voteCount: number }>;
+    configuration: object; // ToDo
+    general: {
+        accountMembershipEnabled: boolean;
+        avatarEnabled: boolean;
+        disableLiveLayerActive: boolean;
+        disableLiveLayerVisible: boolean;
+        facebookAppIdList: string[];
+        hasPendingReviewRequest: boolean;
+        joinTypeLock: number[];
+        joinedBaselineCollectionIdList: string[];
+        onlyAllowOfficialTag: boolean;
+        premiumFeatureEnabled: boolean;
+        wellcomeMessage: {
+            enabled: boolean;
+            text: string | null;
+        };
+        mediaList: Array<Array<number | string | (string | null) | string>>;
+
+    };
+    module: object; // ToDo
+    page: object; // ToDo
+    content: string;
+    extensions: object; // ToDo
+    isStandaloneAppMonetizationEnabled: boolean;
+    keywords: string;
+    listedStatus: number;
+    mediaList: Array<Array<number | string | (string | null) | string>>;
+    searchable: boolean;
 }
 
 export interface IAminoThread {
-    uid: string;
-    membersQuota: number;
-    membersSummary: IMiniUserProfile[];
-    threadId: string;
-    keywords: string;
-    membersCount: number;
-    title: string;
-    membershipStatus: number;
-    content: string;
-    latitude?: number;
     alertOption: number;
-    lastReadTime?: Date;
-    type: number;
-    status: number;
-    modifiedTime?: Date;
-    lastMessageSummary?: any;
+    author: {
+        accountMembershipStatus: number;
+    } & IMiniUserProfile;
     condition: number;
+    content: string | null;
+    extensions: {
+        bannedMemberUidList: string[];
+        bm: Array<number | string | (null | undefined)>;
+        channelType?: number;
+        lastMembersSummaryUpdateTime: number;
+    };
     icon: string;
-    latestActivityTime?: Date;
-    longitude?: number;
-    extensions?: any;
-    createdTime?: Date;
+    isPinned?: boolean;
+    keywords: string | null;
+    lastMessageSummary: IAminoMiniMessage;
+    lastReadTime: string | null;
+    latestActivityTime: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    membersCount: number;
+    membersQuota: number;
+    membersSummary: {
+        membershipStatus: number;
+    } & IMiniUserProfile[];
+    membershipStatus: number;
+    modifiedTime: string;
+    status: number;
+    threadId: string;
+    title: string;
+    type: number;
+    uid: string;
 }
 
 export interface IMiniUserProfile {
-    status: number;
-    uid: string;
+    icon: string;
     level: number;
-    onlineStatus: number;
+    nickname: string;
     reputation: number;
     role: number;
-    nickname: string;
-    icon: string;
+    status: number;
+    uid: string;
 }
+
+export interface IMiniUserProfileNullable {
+    icon: string | null;
+    level: number;
+    nickname: string | null;
+    reputation: number;
+    role: number | null;
+    status: number | null;
+    uid: string;
+}
+
 
 export interface IPublicChats {
     threadList: IAminoThread[];
     recommendedThreadList: IAminoThread[];
 }
 
-export interface IAminoMessage {
-    author: IMiniUserProfile;
-    threadId: string;
+export interface IAminoMiniMessage {
+    content: string | null;
+    createdTime: string;
     mediaType: number;
-    content?: string;
-    mediaValue?: string;
-    clientRefId: string;
+    mediaValue: string | null;
     messageId: string;
-    createdTime: Date;
     type: number;
+    uid: string;
+}
+
+export interface IAminoMessage extends IAminoMiniMessage {
+    author: {
+        accountMembershipStatus: number;
+    } & IMiniUserProfile;
+    chatBubbleId?: string;
+    chatBubbleVersion?: number;
+    clientRefId: string;
+    extensions: object;
+    threadId: string;
 }

@@ -107,7 +107,7 @@ class AminoClient {
         return await this.get(Endpoints.LEAVE_COMMUNITY(ndcId));
     }
 
-    public async getCommunityInfo(ndcId: number): Promise<any> {
+    public async getCommunityInfo(ndcId: number): Promise<AminoTypes.IAminoCommunityComplex> {
         return await this.get(Endpoints.COMMUNITY_INFO(ndcId));
     }
 

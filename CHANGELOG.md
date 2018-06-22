@@ -4,15 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Future]
 - Keep investigating the API and add more methods.
 - Add types to getCommunities.
 - Add types to getHeadlines.
 - Add types to joinCommunity.
 - Add types to leaveCommunity.
-- Add types to getCommunityInfo.
 - Add types to leaveThread.
 - Add types to joinThread.
+
+## [Unreleased]
+### Added
+- Added types to getCommunityInfo.
+
+### Changed
+- Refactored a bunch of interfaces.
+- Interface types now are sorted so its easier to check for changes in the API.
 
 ## [1.0.6] - 2018-06-21
 ### Added
