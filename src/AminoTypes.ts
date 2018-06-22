@@ -171,9 +171,9 @@ export interface IAminoCommunityComplex extends IAminoCommunityBase {
     agent: {
         accountMembershipStatus: number;
     } & IMiniUserProfile;
-    communityHeadList: {
+    communityHeadList: Array<{
         accountMembershipStatus: number;
-    } & IMiniUserProfile[];
+    } & IMiniUserProfile>;
     communityTagList: Array<{ name: string, voteCount: number }>;
     configuration: object; // ToDo
     general: {
@@ -228,9 +228,9 @@ export interface IAminoThread {
     longitude: number | null;
     membersCount: number;
     membersQuota: number;
-    membersSummary: {
+    membersSummary: Array<{
         membershipStatus: number;
-    } & IMiniUserProfile[];
+    } & IMiniUserProfile>;
     membershipStatus: number;
     modifiedTime: string;
     status: number;
