@@ -195,6 +195,16 @@ export interface IAminoCommunityComplex extends IAminoCommunityBase {
     searchable: boolean;
 }
 
+export interface IAminoCommunityInfo extends IBaseAPI {
+    community: IAminoCommunityComplex;
+    currentUserInfo: {
+        notificationsCount: number;
+        unreadChatThreadsCount: number;
+        userProfile: object; // ToDo
+    };
+    isCurrentUserJoined: boolean;
+}
+
 export interface IAminoThread {
     alertOption: number;
     author: {
