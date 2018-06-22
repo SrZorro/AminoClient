@@ -73,7 +73,7 @@ export interface ICheckInUserProfile {
 }
 
 export interface ICommunityInfo extends IBaseAPI {
-    community: any;
+    community: IAminoCommunityComplex;
     currentUserInfo: {
         notificationsCount: number;
         unreadChatThreadsCount: number;
@@ -88,36 +88,36 @@ export interface IJoinedCommunitiesInfo {
 }
 
 export interface IUserProfile {
-    status: number;
-    moodSticker: any;
-    itemsCount: number;
-    consecutiveCheckInDays: any;
-    uid: string;
-    modifiedTime: string;
-    joinedCount: number;
-    onlineStatus: number;
     accountMembershipStatus: number;
+    address: string | null;
+    age: number | null;
+    blogsCount: number;
+    consecutiveCheckInDays: number | null;
+    content: string | null;
     createdTime: string;
-    longitude: null | number;
-    race: null | string;
-    address: null | string;
-    membersCount: number;
-    nickname: string;
-    mediaList: any;
+    extensions: object | null;
+    gender: string | null;
     icon: string;
-    mood: null | string;
+    itemsCount: number;
+    joinedCount: number;
+    latitude: number | null;
     level: number;
-    gender: null | string;
-    age: null | any;
-    settings: { onlineStatus: number };
-    pushEnabled: boolean;
+    longitude: number | null;
+    mediaList: any | null;
+    membersCount: number;
     membershipStatus: number;
-    content: null | string;
+    modifiedTime: string;
+    mood: null | string;
+    moodSticker: any | null;
+    nickname: string;
+    onlineStatus: number;
+    pushEnabled: boolean;
+    race: string | null;
     reputation: number;
     role: number;
-    latitude: null | number;
-    extensions: null | any;
-    blogsCount: number;
+    settings: { onlineStatus: number };
+    status: number;
+    uid: string;
 }
 
 export interface IAminoCommunityBase {
@@ -193,16 +193,6 @@ export interface IAminoCommunityComplex extends IAminoCommunityBase {
     listedStatus: number;
     mediaList: Array<Array<number | string | (string | null) | string>>;
     searchable: boolean;
-}
-
-export interface IAminoCommunityInfo extends IBaseAPI {
-    community: IAminoCommunityComplex;
-    currentUserInfo: {
-        notificationsCount: number;
-        unreadChatThreadsCount: number;
-        userProfile: object; // ToDo
-    };
-    isCurrentUserJoined: boolean;
 }
 
 export interface IAminoThread {
