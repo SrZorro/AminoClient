@@ -170,7 +170,7 @@ class AminoClient {
             timestamp: Math.round((new Date()).getTime() / 1000)
         };
         if (mediaB64)
-            //@ts-ignore
+            // @ts-ignore
             body.mediaUploadValue = mediaB64;
 
         // Note: PNG support is kinda wroken, its converted to jpg and creates artefacts where transparency was located.

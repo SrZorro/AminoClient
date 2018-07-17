@@ -235,7 +235,7 @@ export interface IAminoThread {
     modifiedTime: string;
     status: number;
     threadId: string;
-    title: string;
+    title: string | null;
     type: number;
     uid: string;
 }
