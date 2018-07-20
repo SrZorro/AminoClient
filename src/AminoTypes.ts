@@ -232,6 +232,7 @@ export interface IAminoThread {
         membershipStatus: number;
     } & IMiniUserProfile>;
     membershipStatus: number;
+    createdTime: string;
     modifiedTime: string;
     status: number;
     threadId: string;
@@ -273,7 +274,6 @@ export interface IAminoMiniMessage {
     mediaValue: string | null;
     messageId: string;
     type: number;
-    uid: string;
 }
 
 export interface IAminoMessage extends IAminoMiniMessage {
